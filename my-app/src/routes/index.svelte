@@ -3,58 +3,35 @@
 </script>
 
 <script>
-	import Counter from '$lib/Counter.svelte';
+	import Boid from '$lib/boid/boid';
+	import Victor from 'victor';
+	import Surfer from '$lib/Surfer.svelte';
+
+	let mouse = { x: 0, y: 0 };
+
+	/**
+	 * @param {{ clientX: any; clientY: any; }} event
+	 */
+	function handleMouseMove(event) {
+		mouse.x = event.clientX;
+		mouse.y = event.clientY;
+	}
+
+	var counter = 0
+	let /** @type {Boid[]} */ boids = [...Array(15)].map(() => new Boid(counter++));
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
+<div on:mousemove={handleMouseMove}>
+	<div>DET ER SOMMER I HELE VERDEN</div>
 
-<section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</div>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
+	{#each boids as boid, i}
+		<Surfer {mouse} {boid} {boids} startPos={new Victor(i * 40, i)} />
+	{/each}
+</div>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 1;
-	}
-
-	h1 {
+	div {
 		width: 100%;
-	}
-
-	.welcome {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+		min-height: 100vh;
 	}
 </style>
