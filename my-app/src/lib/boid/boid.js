@@ -13,7 +13,7 @@ export default function Boid(id) {
 	this.acceleration = new Victor(0, 0);
 
 	this.viewDistance = 100
-	this.desiredSpeed = 6
+	this.desiredSpeed = 20
 
 
 	/**

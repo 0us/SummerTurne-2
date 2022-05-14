@@ -4,23 +4,30 @@
 	// @ts-ignore
 	import Boid from '$lib/boid/boid';
 	import { onMount } from 'svelte';
+	import { spring } from 'svelte/motion';
 
-	const mouseVector = new Victor(0, 0);
+	let mouseVector = new Victor(0, 0);
+	let coords = spring({ x: 50, y: 50 });
+
+	coords.stiffness = 0.1
+	coords.damping = 0.2
 
 	$: {
 		mouseVector.x = mouse.x;
 		mouseVector.y = mouse.y;
-
 		// @ts-ignore
 		boid.tick(mouseVector, boids);
-		boid = boid;
+		coords.set({
+			x: boid.position.x,
+			y: boid.position.y
+		})
 	}
 
 	onMount(async () => {
 		console.log('Boid Init');
 		// @ts-ignore
 		boid.position.add(startPos);
-		boid = boid
+		boid = boid;
 	});
 
 	export /** @type {Boid} */ let boid;
@@ -31,8 +38,8 @@
 
 <div
 	class="surfer"
-	style:top={boid.position.y + 'px'}
-	style:left={boid.position.x + 'px'}
+	style:top={$coords.y + 'px'}
+	style:left={$coords.x + 'px'}
 	in:fly={{ y: 200, duration: 2000 }}
 >
 	🏄
