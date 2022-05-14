@@ -12,7 +12,7 @@ export default function Boid(id) {
 	this.velocity = new Victor(0, 0);
 	this.acceleration = new Victor(0, 0);
 
-	this.viewDistance = 40
+	this.viewDistance = 100
 	this.desiredSpeed = 6
 
 
@@ -40,7 +40,7 @@ function getWeights() {
 	//TODO !
 	// Recommended values: 4/8, 3/8, 1/8
 	return {
-		separation: 6 / 8,
+		separation: 4 / 8,
 		alignment: 6 / 8,
 		cohesion: 1 / 8
 	};

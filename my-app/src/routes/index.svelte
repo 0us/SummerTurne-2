@@ -18,7 +18,7 @@
 	}
 
 	var counter = 0
-	let /** @type {Boid[]} */ boids = [...Array(15)].map(() => new Boid(counter++));
+	let /** @type {Boid[]} */ boids = [...Array(30)].map(() => new Boid(counter++));
 </script>
 
 <div on:mousemove={handleMouseMove}>
