@@ -27,9 +27,9 @@
 <div id="app-container" on:mousemove={handleMouseMove}>
 	<h1 class="main-text">DET ER SOMMER I HELE VERDEN</h1>
 
-	<!-- {#each boids as boid, i}
+	{#each boids as boid, i}
 		<Surfer {mouse} {boid} {boids} startPos={new Victor(i * 40, i)} />
-	{/each} -->
+	{/each}
 	<Wave />
 </div>
 
