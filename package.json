@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "svelte-kit dev",
-		"start": "svelte-kit dev",
+		"start": "node build/index.js",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
@@ -32,6 +32,7 @@
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.5.0",
 		"@lukeed/uuid": "^2.0.0",
+		"@sveltejs/adapter-node": "^1.0.0-next.73",
 		"cookie": "^0.4.1",
 		"victor": "^1.1.0"
 	}
