@@ -24,9 +24,7 @@
 </script>
 
 <div id="app-container" on:mousemove={handleMouseMove}>
-	<div>
-		<h1 class="main-text">DET ER SOMMER I HELE VERDEN</h1>
-	</div>
+	<h1 class="main-text">DET ER SOMMER I HELE VERDEN</h1>
 
 	{#each boids as boid, i}
 		<Surfer {mouse} {boid} {boids} startPos={new Victor(i * 40, i)} />
@@ -41,26 +39,20 @@
 	#app-container {
 		padding: 1rem;
 		height: 100%;
+
+		background-image: url('../assets/background.png');
+		background-repeat: no-repeat;
+		background-color: #59b9f7;
 	}
 
 	.main-text {
+		margin-top: 8rem;
+
 		font-size: 15rem;
-		background-image: linear-gradient(
-			to right,
-			#2f61fe,
-			#0075fb,
-			#0083f0,
-			#008ee1,
-			#0096cf,
-			#28a0cd,
-			#44a9ca,
-			#5db2c7,
-			#74c2d4,
-			#8ad3e1,
-			#9fe3ef,
-			#b5f4fd
-		);
+		background-image: linear-gradient(to right, #9fe3ef, #b5f4fd);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
+
+		user-select: none;
 	}
 </style>
