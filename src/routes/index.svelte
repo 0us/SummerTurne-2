@@ -8,6 +8,7 @@
 	import Boid from '$lib/boid/boid';
 	import Victor from 'victor';
 	import Surfer from '$lib/Surfer.svelte';
+	import Wave from '$lib/Wave.svelte';
 
 	let mouse = { x: 0, y: 0 };
 
@@ -26,9 +27,10 @@
 <div id="app-container" on:mousemove={handleMouseMove}>
 	<h1 class="main-text">DET ER SOMMER I HELE VERDEN</h1>
 
-	{#each boids as boid, i}
+	<!-- {#each boids as boid, i}
 		<Surfer {mouse} {boid} {boids} startPos={new Victor(i * 40, i)} />
-	{/each}
+	{/each} -->
+	<Wave />
 </div>
 
 <style>
@@ -46,6 +48,8 @@
 	}
 
 	.main-text {
+		position: absolute;
+
 		margin-top: 8rem;
 
 		font-size: 15rem;
