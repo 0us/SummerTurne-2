@@ -3,14 +3,14 @@
 	import Victor from 'victor';
 	// @ts-ignore
 	import Boid from '$lib/boid/boid';
-	import { onMount } from 'svelte';
+	import { onMount, afterUpdate } from 'svelte';
 	import { spring } from 'svelte/motion';
 
 	let mouseVector = new Victor(0, 0);
 	let coords = spring({ x: 50, y: 50 });
 
-	coords.stiffness = 0.1
-	coords.damping = 0.2
+	coords.stiffness = 0.1;
+	coords.damping = 0.5;
 
 	$: {
 		mouseVector.x = mouse.x;
@@ -20,8 +20,15 @@
 		coords.set({
 			x: boid.position.x,
 			y: boid.position.y
-		})
+		});
 	}
+
+	afterUpdate(() => {
+		if (boid.velocity.length() > 1) {
+			// force update
+			mouse = mouse
+		}
+	});
 
 	onMount(async () => {
 		console.log('Boid Init');
@@ -34,6 +41,7 @@
 	export /** @type {Boid[]} */ let boids;
 	export /** @type {Victor} */ let startPos;
 	export let mouse = { x: 0, y: 0 };
+
 </script>
 
 <div
