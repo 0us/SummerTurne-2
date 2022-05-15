@@ -9,6 +9,7 @@
 	import Victor from 'victor';
 	import Surfer from '$lib/Surfer.svelte';
 	import Wave from '$lib/Wave.svelte';
+	import Duck from '$lib/Duck.svelte';
 
 	let mouse = { x: 0, y: 0 };
 
@@ -26,11 +27,11 @@
 
 <div id="app-container" on:mousemove={handleMouseMove}>
 	<h1 class="main-text">DET ER SOMMER I HELE VERDEN</h1>
-
 	{#each boids as boid, i}
 		<Surfer {mouse} {boid} {boids} startPos={new Victor(i * 40, i)} />
 	{/each}
 	<Wave />
+	<Duck />
 </div>
 
 <style>
