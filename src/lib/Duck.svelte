@@ -1,22 +1,23 @@
 <script>
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 
 	import { onMount } from 'svelte';
 	/**
 	 * @type {number}
 	 */
-	let x;
+	let windowX;
 	/**
 	 * @type {number}
 	 */
-	let y;
-
-	let visible = false;
+	let windowY;
 
 	/**
 	 * @type {HTMLAudioElement}
 	 */
 	let audio;
+
+	let visible = false;
+	let coords = { x: 0, y: 0 };
 
 	$: {
 		if (visible) {
@@ -25,26 +26,35 @@
 			}, 1500);
 		} else {
 			setTimeout(() => {
-				coords.x = Math.random() * x;
-				coords.y = Math.random() * y;
-				visible = true;
+				coords.x = Math.random() * windowX;
+				coords.y = Math.random() * windowY;
 				if (audio) {
                     audio.play();
                 }
+				visible = true;
 			}, Math.random() * 60000);
 		}
 	}
-	let coords = { x: 0, y: 0 };
-
-	setInterval(() => {});
 
 	onMount(() => {
 		visible = false;
         audio.volume = 40
 	});
+
+    function randomPosX() {
+        return randomIn(windowX)
+    }
+
+    function randomPosY() {
+        return randomIn(windowY)
+    }
+
+    function randomIn(number) {
+        return (Math.random() - 0.5) * number
+    }
 </script>
 
-<svelte:window bind:innerHeight={y} bind:innerWidth={x} />
+<svelte:window bind:innerHeight={windowY} bind:innerWidth={windowX} />
 
 <div>
 	<audio bind:this={audio}>
@@ -55,8 +65,8 @@
 			class="duck"
 			style:top={coords.y + 'px'}
 			style:left={coords.x + 'px'}
-			in:fly={{ x: 500, y: 200, duration: 1000 }}
-			out:fly={{ x: -500, y: -200, duration: 1000 }}
+			in:fly={{ x: randomPosX(), y: randomPosY(), opacity: 0.5, duration: 1000 }}
+			out:fly={{ x: randomPosX(), y: randomPosY(), duration: 1000 }}
 		>
 			🦆
 		</div>
